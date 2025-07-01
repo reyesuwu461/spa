@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Introducción a JavaScript",
+      "body": "JavaScript es un lenguaje de programación versátil.",
+      "author": "Juan Pérez"
+    },
+    {
+      "id": 2,
+      "title": "DOM Manipulation",
+      "body": "El DOM permite interactuar con los elementos HTML.",
+      "author": "Samuel Reyes"
+    }
+  ]
+}

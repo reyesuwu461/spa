@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPA de Programación</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-mode">
+<header>
+<button id="game-icon" class="game-icon" title="Ir al juego">
+  <img src="/game/img/calavera-y-huesos.png" alt="Icono del juego">
+</button>
+</a>
+  <h1>Blog de Programación</h1>
+  <div class="toggle-container">
+    <input id="switch" type="checkbox">
+    <label for="switch">
+      <span class="toggle"></span>
+      <span class="names">
+        <span class="light">☀️</span>
+        <span class="dark">🌙</span>
+      </span>
+    </label>
+  </div>
+</header>
+
+  <main>
+    <section id="posts-section">
+      <h2>Artículos Recientes</h2>
+      <div id="posts-container"></div>
+    </section>
+
+    <section id="form-section">
+      <h2>Agregar Nuevo Artículo</h2>
+      <form id="post-form">
+        <input type="text" id="title" placeholder="Título" required>
+        <textarea id="body" placeholder="Contenido" required></textarea>
+        <input type="text" id="author" placeholder="Autor" required>
+        <button type="submit">Guardar</button>
+      </form>
+    </section>
+
+    <section id="local-storage-section">
+      <h2>Local Storage</h2>
+      <div class="storage-controls">
+        <input type="text" id="storage-key" placeholder="Clave">
+        <input type="text" id="storage-value" placeholder="Valor">
+        <button id="save-storage">Guardar</button>
+        <button id="get-storage">Obtener</button>
+        <button id="remove-storage">Eliminar</button>
+      </div>
+      <div id="storage-output"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
