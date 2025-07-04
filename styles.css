@@ -1,339 +1,421 @@
-:root {
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --primary-color: #4a6fa5;
-  --secondary-color: #f0f0f0;
-  --border-color: #dddddd;
-}
-
-.dark-mode {
-  --bg-color: #1a1a1a;
-  --text-color: #f0f0f0;
-  --primary-color: #6d8bc7;
-  --secondary-color: #2d2d2d;
-  --border-color: #444444;
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-header {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Toggle switch styles - Versión con emojis */
-.toggle-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-
-.toggle-container label {
-  position: relative;
-  display: inline-block;
-  width: 70px;
-  height: 30px;
-  background-color: rgba(0,0,0,.1);
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.toggle-container .toggle {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 26px;
-  height: 26px;
-  background-color: #fff;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0,0,0,.2);
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.toggle-container .names {
-  font-size: 16px;
-  position: absolute;
-  top: 5px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 12px;
-  box-sizing: border-box;
-  user-select: none;
-}
-
-.toggle-container .light {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.toggle-container .dark {
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-}
-
-.toggle-container [type="checkbox"] {
-  display: none;
-}
-
-.toggle-container [type="checkbox"]:checked + label {
-  background-color: rgba(255,255,255,.1);
-}
-
-.toggle-container [type="checkbox"]:checked + label .toggle {
-  transform: translateX(40px);
-  background-color: #34323D;
-}
-
-.toggle-container [type="checkbox"]:checked + label .dark {
-  opacity: 1;
-}
-
-.toggle-container [type="checkbox"]:checked + label .light {
-  opacity: 0.5;
-}
-
-/* Ajustes para modo oscuro */
-body.dark-mode .toggle-container label {
-  background-color: rgba(255,255,255,.1);
-}
-
-body.dark-mode .toggle {
-  background-color: #34323D;
-}
-
-main {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-section {
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background-color: var(--secondary-color);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#posts-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-}
-
-/* Estilos para las tarjetas de posts */
-.post-card {
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  line-height: 1.6;
   transition: all 0.3s ease;
 }
 
-.post-card h3 {
-  color: var(--primary-color);
-  margin-top: 0;
+.light-mode {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+.theme-toggle {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.1);
+}
+
+/* Main Content */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Tabs */
+.content-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  background: #5a6fd8;
+  transform: translateY(-2px);
+}
+
+.tab-btn.active {
+  background: #764ba2;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+}
+
+/* Content Container */
+#content-container {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+  min-height: 200px;
+}
+
+.dark-mode #content-container {
+  background: #2d2d2d;
+  color: #f5f5f5;
+}
+
+.content-item {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 1.5rem;
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
 }
 
-.post-card p {
-  color: var(--text-color);
-  margin-bottom: 1rem;
-  line-height: 1.6;
+.dark-mode .content-item {
+  background: #3d3d3d;
 }
 
-.post-card small {
-  color: var(--text-color);
-  opacity: 0.7;
-  font-size: 0.9rem;
+.content-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* Estilos para el modo oscuro */
-body.dark-mode .post-card {
-  background-color: #2d2d2d;
-  border-color: #444;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+.content-item h3 {
+  color: #667eea;
+  margin-bottom: 0.5rem;
 }
 
-body.dark-mode .post-card h3 {
-  color: #6d8bc7;
+.content-item .actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
-/* Estilos para el contenedor de mensaje de ejemplo */
-.example-notice {
-  background-color: rgba(255, 165, 0, 0.1);
-  border-left: 4px solid orange;
-  padding: 1rem;
+/* Form Container */
+#form-container {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+
+.dark-mode #form-container {
+  background: #2d2d2d;
+}
+
+#form-title {
+  color: #667eea;
   margin-bottom: 1.5rem;
 }
 
-body.dark-mode .example-notice {
-  background-color: rgba(255, 165, 0, 0.2);
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
-/* Asegurar que el toggle funcione */
-.toggle-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
 }
 
-.post-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
+.dark-mode .form-group label {
+  color: #ccc;
 }
 
-button {
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-button:hover {
-  background-color: #3a5a8f;
-}
-
-input, textarea {
+.form-group input,
+.form-group textarea {
   width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group textarea {
+  background: #3d3d3d;
+  border-color: #555;
+  color: #f5f5f5;
+}
+
+/* Buttons */
+.submit-btn, .edit-btn, .delete-btn, .danger-btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-right: 0.5rem;
+}
+
+.submit-btn {
+  background: #28a745;
+  color: white;
+}
+
+.submit-btn:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}
+
+.edit-btn {
+  background: #ffc107;
+  color: #212529;
+}
+
+.edit-btn:hover {
+  background: #e0a800;
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+}
+
+.danger-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.danger-btn:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+/* Storage Section */
+#local-storage-section {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+
+.dark-mode #local-storage-section {
+  background: #2d2d2d;
 }
 
 .storage-controls {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .storage-controls input {
   flex: 1;
-  margin-bottom: 0;
+  min-width: 150px;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.dark-mode .storage-controls input {
+  background: #3d3d3d;
+  border-color: #555;
+  color: #f5f5f5;
 }
 
 #storage-output {
+  background: #f8f9fa;
+  border-radius: 8px;
   padding: 1rem;
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  min-height: 50px;
+  min-height: 100px;
+  border: 1px solid #e0e0e0;
+  font-family: monospace;
+  white-space: pre-wrap;
 }
 
-.status-message {
+.dark-mode #storage-output {
+  background: #3d3d3d;
+  border-color: #555;
+  color: #f5f5f5;
+}
+
+/* Game Icon */
+#game-icon-container {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 1rem;
-  border-radius: 4px;
-  color: white;
+  bottom: 100px;
+  right: 50px;
   z-index: 1000;
-  animation: slideIn 0.3s ease-out;
 }
 
-@keyframes slideIn {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-}
-
-.status-message.success {
-  background-color: #4CAF50;
-}
-
-.status-message.error {
-  background-color: #F44336;
-}
-
-.error {
-  color: #F44336;
-  padding: 1rem;
-  background-color: #ffebee;
-  border-radius: 4px;
-}
-
+/* Estilos para el juego */
 .game-icon {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1000;
-  background: #ffffff;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  padding: 10px;
+  background-color: #22c4ff;
+  color: white;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s;
 }
 
 .game-icon:hover {
   transform: scale(1.1);
 }
 
-.game-icon img {
-  width: 40px;
-  height: 40px;
-  display: block;
+.game-container {
+  width: 100%;
+  height: 80vh;
+  position: relative;
 }
 
-/* Estilos para el contenedor del juego */
-#game-iframe-container {
+.game-iframe {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+}
+
+.close-game-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Estilos para el modal (opción 3) */
+.game-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.9);
-  z-index: 1000;
-  display: none;
+  background: rgba(0,0,0,0.8);
+  z-index: 1001;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#game-iframe-container iframe {
+.modal-content {
+  position: relative;
   width: 90%;
   height: 90%;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 0 30px rgba(255,0,255,0.7);
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-#game-iframe-container button {
+.game-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.close-modal {
   position: absolute;
-  top: 20px;
+  top: 10px;
   right: 20px;
-  padding: 10px 15px;
-  background: #ff0000;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  font-size: 30px;
+  color: #fff;
   cursor: pointer;
-  font-size: 1.2rem;
-  z-index: 1001;
+  z-index: 2;
+}
+/* Status Messages */
+.success {
+  color: #28a745;
+  font-weight: 500;
 }
 
-#game-iframe-container button:hover {
-  background: #ff5555;
+.error {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .content-tabs {
+    flex-direction: column;
+  }
+  
+  .storage-controls {
+    flex-direction: column;
+  }
+  
+  .storage-controls input {
+    min-width: 100%;
+  }
+  
+  #game-iframe-container iframe {
+    width: 95%;
+    height: 95%;
+  }
 }
