@@ -7,6 +7,25 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="light-mode">
+  <!-- Overlay del juego -->
+  <div id="game-overlay" class="game-overlay" style="display: none;">
+    <div class="game-container">
+      <div class="game-header">
+        <h3>🎮 Pandemoniun Crusader</h3>
+        <button class="close-game-btn" id="close-game-btn" title="Cerrar juego">✖</button>
+      </div>
+      <div class="game-content">
+        <iframe id="game-iframe" src="game/game.html" class="game-iframe"></iframe>
+        <div id="game-error" class="game-error" style="display: none;">
+          <h4>⚠️ Error al cargar el juego</h4>
+          <p>No se pudo encontrar el archivo del juego.</p>
+          <p>Asegúrate de que el archivo "game.html" existe en la misma carpeta.</p>
+          <button id="retry-game-btn" class="retry-btn">Reintentar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Contenido principal -->
   <div id="app-content">
     <header>
@@ -54,9 +73,9 @@
   </div>
 
   <!-- Botón del juego (flotante) -->
-<div id="game-icon-container">
-  <button id="game-icon" class="game-icon" title="Jugar">☠️</button>
-</div>
+  <div id="game-icon-container">
+    <button id="game-icon" class="game-icon" title="Jugar">☠️</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
