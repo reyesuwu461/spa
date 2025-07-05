@@ -2,7 +2,6 @@
 let currentContentType = 'posts';
 let editingId = null;
 let isGameOpen = false;
-let previousContent = null;
 
 // Datos de ejemplo
 const sampleData = {
@@ -76,7 +75,7 @@ function initializeApp() {
   setupEventListeners();
   
   // Cargar contenido inicial
-  loadContent(true); // Forzar carga inicial
+  loadContent(true);
   generateForm();
   
   // Aplicar tema guardado
@@ -132,12 +131,12 @@ function setupEventListeners() {
   const clearStorageBtn = document.getElementById('clear-storage');
   if (clearStorageBtn) clearStorageBtn.addEventListener('click', clearStorage);
 
-  // Juego - Versión corregida
+  // Juego
   const gameIcon = document.getElementById('game-icon');
   if (gameIcon) {
     gameIcon.addEventListener('click', function(e) {
       e.preventDefault();
-      e.stopImmediatePropagation();
+      e.stopPropagation();
       
       if (isGameOpen) {
         closeGame();
@@ -145,6 +144,25 @@ function setupEventListeners() {
         openGame();
       }
     });
+  }
+
+  // Botón cerrar juego
+  const closeGameBtn = document.getElementById('close-game-btn');
+  if (closeGameBtn) {
+    closeGameBtn.addEventListener('click', closeGame);
+  }
+
+  // Botón reintentar juego
+  const retryGameBtn = document.getElementById('retry-game-btn');
+  if (retryGameBtn) {
+    retryGameBtn.addEventListener('click', retryGame);
+  }
+
+  // Iframe del juego
+  const gameIframe = document.getElementById('game-iframe');
+  if (gameIframe) {
+    gameIframe.addEventListener('load', handleGameLoad);
+    gameIframe.addEventListener('error', handleGameError);
   }
 }
 
@@ -172,7 +190,6 @@ function loadContent(initialLoad = false) {
   const container = document.getElementById('content-container');
   if (!container) {
     if (initialLoad) {
-      // Reintentar después de un breve retraso si es la carga inicial
       setTimeout(() => loadContent(true), 100);
     }
     return;
@@ -191,8 +208,6 @@ function loadContent(initialLoad = false) {
   }
   
   container.innerHTML = data.map(item => createContentItem(item)).join('');
-  
-  // Forzar renderizado
   void container.offsetHeight;
 }
 
@@ -256,7 +271,6 @@ function generateForm() {
     ${editingId ? '<button type="button" class="edit-btn" onclick="cancelEdit()">Cancelar</button>' : ''}
   `;
   
-  // Si estamos editando, llenar el formulario
   if (editingId) {
     fillFormForEdit();
   }
@@ -291,7 +305,6 @@ function handleFormSubmit(e) {
   });
   
   if (editingId) {
-    // Actualizar item existente
     const index = data.findIndex(item => item.id === editingId);
     if (index !== -1) {
       newItem.id = editingId;
@@ -299,14 +312,12 @@ function handleFormSubmit(e) {
     }
     editingId = null;
   } else {
-    // Agregar nuevo item
-    newItem.id = Date.now(); // ID simple basado en timestamp
+    newItem.id = Date.now();
     data.push(newItem);
   }
   
   localStorage.setItem(currentContentType, JSON.stringify(data));
   
-  // Limpiar formulario y recargar contenido
   e.target.reset();
   loadContent();
   generateForm();
@@ -417,7 +428,6 @@ function clearStorage() {
     document.getElementById('storage-key').value = '';
     document.getElementById('storage-value').value = '';
     
-    // Recargar datos de ejemplo
     localStorage.setItem('posts', JSON.stringify(sampleData.posts));
     localStorage.setItem('products', JSON.stringify(sampleData.products));
     loadContent();
@@ -442,64 +452,68 @@ function showStatus(type, message) {
   }, 3000);
 }
 
-// Funciones del juego - Versión corregida
+// Funciones del juego
 function openGame() {
-  // Guardar el estado actual
-  previousContent = {
-    html: document.getElementById('content-container').innerHTML,
-    scrollPosition: window.scrollY
-  };
+  if (isGameOpen) return;
   
-  // Mostrar estado de carga
-  document.getElementById('content-container').innerHTML = `
-    <div class="game-loading">
-      <div class="spinner"></div>
-      <p>Cargando juego...</p>
-    </div>
-  `;
-  
-  // Simular carga (reemplazar con tu lógica real)
-  setTimeout(() => {
-    // Crear contenedor del juego
-    document.getElementById('content-container').innerHTML = `
-      <div class="game-container">
-        <button class="close-game-btn">✕ Cerrar Juego</button>
-        <iframe src="/modelized" class="game-iframe"></iframe>
-      </div>
-    `;
+  isGameOpen = true;
+  const overlay = document.getElementById('game-overlay');
+  if (overlay) {
+    overlay.style.display = 'block';
     
-    // Configurar evento para cerrar el juego
-    document.querySelector('.close-game-btn').addEventListener('click', closeGame);
-    
-    isGameOpen = true;
-    
-    // Actualizar historial sin recargar
-    history.pushState({ game: true }, '', '/modelized');
-  }, 800);
+    // Verificar si el juego carga correctamente
+    setTimeout(() => {
+      const iframe = document.getElementById('game-iframe');
+      if (iframe) {
+        try {
+          if (iframe.contentDocument === null) {
+            handleGameError();
+          }
+        } catch (error) {
+          console.warn('Error al verificar el juego:', error);
+        }
+      }
+    }, 2000);
+  }
 }
 
 function closeGame() {
-  // Restaurar contenido anterior
-  if (previousContent) {
-    document.getElementById('content-container').innerHTML = previousContent.html;
-    window.scrollTo(0, previousContent.scrollPosition);
-  } else {
-    // Contenido por defecto si no hay estado previo
-    loadContent();
+  const overlay = document.getElementById('game-overlay');
+  if (overlay) {
+    overlay.style.display = 'none';
   }
-  
   isGameOpen = false;
-  
-  // Actualizar historial
-  history.replaceState({}, '', '/');
 }
 
-// Manejar el botón atrás del navegador
-window.addEventListener('popstate', function(event) {
-  if (isGameOpen) {
-    closeGame();
+function handleGameLoad() {
+  const errorDiv = document.getElementById('game-error');
+  if (errorDiv) {
+    errorDiv.style.display = 'none';
   }
-});
+  console.log('Juego cargado exitosamente');
+}
+
+function handleGameError() {
+  const errorDiv = document.getElementById('game-error');
+  const iframe = document.getElementById('game-iframe');
+  
+  if (errorDiv && iframe) {
+    errorDiv.style.display = 'block';
+    iframe.style.display = 'none';
+  }
+  console.error('Error al cargar el juego');
+}
+
+function retryGame() {
+  const iframe = document.getElementById('game-iframe');
+  const errorDiv = document.getElementById('game-error');
+  
+  if (iframe && errorDiv) {
+    errorDiv.style.display = 'none';
+    iframe.style.display = 'block';
+    iframe.src = iframe.src; // Recargar el iframe
+  }
+}
 
 // Hacer funciones accesibles globalmente
 window.editItem = editItem;
