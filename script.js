@@ -1,69 +1,69 @@
-// Estado de la aplicación
-let currentContentType = 'posts';
-let editingId = null;
-let isGameOpen = false;
+// Application state
+let currentContentType = 'posts'; // Current content type (posts/products)
+let editingId = null; // ID of item being edited
+let isGameOpen = false; // Game overlay visibility state
 
-// Datos de ejemplo
+// Sample data structure
 const sampleData = {
   posts: [
     {
       id: 1,
-      title: "Primer Artículo",
-      content: "Este es el contenido del primer artículo de ejemplo.",
-      author: "Juan Pérez",
+      title: "First Article",
+      content: "This is the content of the first sample article.",
+      author: "John Doe",
       date: "2024-01-15"
     },
     {
       id: 2,
-      title: "Segundo Artículo",
-      content: "Contenido del segundo artículo con información relevante.",
-      author: "María González",
+      title: "Second Article",
+      content: "Content of the second article with relevant information.",
+      author: "Jane Smith",
       date: "2024-01-16"
     }
   ],
   products: [
     {
       id: 1,
-      name: "Producto A",
-      description: "Descripción del producto A con características importantes.",
+      name: "Product A",
+      description: "Description of product A with important features.",
       price: 29.99,
-      category: "Electrónicos"
+      category: "Electronics"
     },
     {
       id: 2,
-      name: "Producto B",
-      description: "Descripción del producto B con especificaciones técnicas.",
+      name: "Product B",
+      description: "Description of product B with technical specifications.",
       price: 49.99,
-      category: "Hogar"
+      category: "Home"
     }
   ]
 };
 
-// Configuración de formularios
+// Form configurations for different content types
 const formConfigs = {
   posts: {
-    title: 'Agregar Nuevo Artículo',
+    title: 'Add New Article',
     fields: [
-      { name: 'title', label: 'Título', type: 'text', required: true },
-      { name: 'content', label: 'Contenido', type: 'textarea', required: true },
-      { name: 'author', label: 'Autor', type: 'text', required: true },
-      { name: 'date', label: 'Fecha', type: 'date', required: true }
+      { name: 'title', label: 'Title', type: 'text', required: true },
+      { name: 'content', label: 'Content', type: 'textarea', required: true },
+      { name: 'author', label: 'Author', type: 'text', required: true },
+      { name: 'date', label: 'Date', type: 'date', required: true }
     ]
   },
   products: {
-    title: 'Agregar Nuevo Producto',
+    title: 'Add New Product',
     fields: [
-      { name: 'name', label: 'Nombre', type: 'text', required: true },
-      { name: 'description', label: 'Descripción', type: 'textarea', required: true },
-      { name: 'price', label: 'Precio', type: 'number', required: true },
-      { name: 'category', label: 'Categoría', type: 'text', required: true }
+      { name: 'name', label: 'Name', type: 'text', required: true },
+      { name: 'description', label: 'Description', type: 'textarea', required: true },
+      { name: 'price', label: 'Price', type: 'number', required: true },
+      { name: 'category', label: 'Category', type: 'text', required: true }
     ]
   }
 };
 
-// Inicializar la aplicación
+// Initialize the application
 function initializeApp() {
-  // Cargar datos iniciales si no existen
+  // Load initial data if it doesn't exist
   if (!localStorage.getItem('posts')) {
     localStorage.setItem('posts', JSON.stringify(sampleData.posts));
   }
@@ -71,22 +71,23 @@ function initializeApp() {
     localStorage.setItem('products', JSON.stringify(sampleData.products));
   }
 
-  // Configurar event listeners
+  // Set up event listeners
   setupEventListeners();
   
-  // Cargar contenido inicial
+  // Load initial content
   loadContent(true);
   generateForm();
   
-  // Aplicar tema guardado
+  // Apply saved theme
   applySavedTheme();
 }
 
-// Asegurar que el DOM esté completamente cargado
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
   initializeApp();
 });
 
+// Apply saved theme from localStorage
 function applySavedTheme() {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
@@ -97,8 +98,9 @@ function applySavedTheme() {
   }
 }
 
+// Set up all event listeners
 function setupEventListeners() {
-  // Tabs
+  // Tab buttons
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       const contentType = this.dataset.contentType;
@@ -106,19 +108,19 @@ function setupEventListeners() {
     });
   });
 
-  // Tema
+  // Theme toggle
   const themeToggle = document.getElementById('theme-toggle');
   if (themeToggle) {
     themeToggle.addEventListener('click', toggleTheme);
   }
 
-  // Formulario
+  // Form submission
   const dynamicForm = document.getElementById('dynamic-form');
   if (dynamicForm) {
     dynamicForm.addEventListener('submit', handleFormSubmit);
   }
 
-  // Local Storage
+  // Local Storage buttons
   const saveStorageBtn = document.getElementById('save-storage');
   if (saveStorageBtn) saveStorageBtn.addEventListener('click', saveToStorage);
   
@@ -131,7 +133,7 @@ function setupEventListeners() {
   const clearStorageBtn = document.getElementById('clear-storage');
   if (clearStorageBtn) clearStorageBtn.addEventListener('click', clearStorage);
 
-  // Juego
+  // Game button
   const gameIcon = document.getElementById('game-icon');
   if (gameIcon) {
     gameIcon.addEventListener('click', function(e) {
@@ -146,19 +148,19 @@ function setupEventListeners() {
     });
   }
 
-  // Botón cerrar juego
+  // Close game button
   const closeGameBtn = document.getElementById('close-game-btn');
   if (closeGameBtn) {
     closeGameBtn.addEventListener('click', closeGame);
   }
 
-  // Botón reintentar juego
+  // Retry game button
   const retryGameBtn = document.getElementById('retry-game-btn');
   if (retryGameBtn) {
     retryGameBtn.addEventListener('click', retryGame);
   }
 
-  // Iframe del juego
+  // Game iframe events
   const gameIframe = document.getElementById('game-iframe');
   if (gameIframe) {
     gameIframe.addEventListener('load', handleGameLoad);
@@ -166,11 +168,12 @@ function setupEventListeners() {
   }
 }
 
+// Switch between content tabs
 function switchTab(contentType) {
   currentContentType = contentType;
   editingId = null;
   
-  // Actualizar botones activos
+  // Update active tab buttons
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.classList.remove('active');
     if (btn.dataset.contentType === contentType) {
@@ -178,14 +181,15 @@ function switchTab(contentType) {
     }
   });
   
-  // Cargar contenido y regenerar formulario
+  // Load content and regenerate form
   loadContent();
   generateForm();
   
-  // Forzar scroll al inicio
+  // Scroll to top
   window.scrollTo(0, 0);
 }
 
+// Load content based on current type
 function loadContent(initialLoad = false) {
   const container = document.getElementById('content-container');
   if (!container) {
@@ -200,28 +204,29 @@ function loadContent(initialLoad = false) {
   if (data.length === 0) {
     container.innerHTML = `
       <div style="text-align: center; padding: 2rem; color: #666;">
-        <h3>No hay ${currentContentType === 'posts' ? 'artículos' : 'productos'} disponibles</h3>
-        <p>Agrega el primer ${currentContentType === 'posts' ? 'artículo' : 'producto'} usando el formulario de abajo.</p>
+        <h3>No ${currentContentType === 'posts' ? 'articles' : 'products'} available</h3>
+        <p>Add the first ${currentContentType === 'posts' ? 'article' : 'product'} using the form below.</p>
       </div>
     `;
     return;
   }
   
   container.innerHTML = data.map(item => createContentItem(item)).join('');
-  void container.offsetHeight;
+  void container.offsetHeight; // Force reflow
 }
 
+// Create HTML for a content item
 function createContentItem(item) {
   if (currentContentType === 'posts') {
     return `
       <div class="content-item">
         <h3>${item.title}</h3>
-        <p><strong>Autor:</strong> ${item.author}</p>
-        <p><strong>Fecha:</strong> ${item.date}</p>
+        <p><strong>Author:</strong> ${item.author}</p>
+        <p><strong>Date:</strong> ${item.date}</p>
         <p>${item.content}</p>
         <div class="actions">
-          <button class="edit-btn" onclick="editItem(${item.id})">Editar</button>
-          <button class="delete-btn" onclick="deleteItem(${item.id})">Eliminar</button>
+          <button class="edit-btn" onclick="editItem(${item.id})">Edit</button>
+          <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button>
         </div>
       </div>
     `;
@@ -229,18 +234,19 @@ function createContentItem(item) {
     return `
       <div class="content-item">
         <h3>${item.name}</h3>
-        <p><strong>Categoría:</strong> ${item.category}</p>
-        <p><strong>Precio:</strong> $${item.price}</p>
+        <p><strong>Category:</strong> ${item.category}</p>
+        <p><strong>Price:</strong> $${item.price}</p>
         <p>${item.description}</p>
         <div class="actions">
-          <button class="edit-btn" onclick="editItem(${item.id})">Editar</button>
-          <button class="delete-btn" onclick="deleteItem(${item.id})">Eliminar</button>
+          <button class="edit-btn" onclick="editItem(${item.id})">Edit</button>
+          <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button>
         </div>
       </div>
     `;
   }
 }
 
+// Generate form based on current content type
 function generateForm() {
   const formContainer = document.getElementById('dynamic-form');
   const formTitle = document.getElementById('form-title');
@@ -250,7 +256,7 @@ function generateForm() {
   const config = formConfigs[currentContentType];
   
   formTitle.textContent = editingId ? 
-    `Editar ${currentContentType === 'posts' ? 'Artículo' : 'Producto'}` : 
+    `Edit ${currentContentType === 'posts' ? 'Article' : 'Product'}` : 
     config.title;
   
   formContainer.innerHTML = config.fields.map(field => {
@@ -266,9 +272,9 @@ function generateForm() {
     `;
   }).join('') + `
     <button type="submit" class="submit-btn">
-      ${editingId ? 'Actualizar' : 'Agregar'} ${currentContentType === 'posts' ? 'Artículo' : 'Producto'}
+      ${editingId ? 'Update' : 'Add'} ${currentContentType === 'posts' ? 'Article' : 'Product'}
     </button>
-    ${editingId ? '<button type="button" class="edit-btn" onclick="cancelEdit()">Cancelar</button>' : ''}
+    ${editingId ? '<button type="button" class="edit-btn" onclick="cancelEdit()">Cancel</button>' : ''}
   `;
   
   if (editingId) {
@@ -276,6 +282,7 @@ function generateForm() {
   }
 }
 
+// Fill form with data for editing
 function fillFormForEdit() {
   const data = JSON.parse(localStorage.getItem(currentContentType) || '[]');
   const item = data.find(i => i.id === editingId);
@@ -293,6 +300,7 @@ function fillFormForEdit() {
   }
 }
 
+// Handle form submission
 function handleFormSubmit(e) {
   e.preventDefault();
   
@@ -322,9 +330,10 @@ function handleFormSubmit(e) {
   loadContent();
   generateForm();
   
-  showStatus('success', `${currentContentType === 'posts' ? 'Artículo' : 'Producto'} ${editingId ? 'actualizado' : 'agregado'} exitosamente`);
+  showStatus('success', `${currentContentType === 'posts' ? 'Article' : 'Product'} ${editingId ? 'updated' : 'added'} successfully`);
 }
 
+// Edit an item
 function editItem(id) {
   editingId = id;
   generateForm();
@@ -332,6 +341,7 @@ function editItem(id) {
   if (formContainer) formContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
+// Cancel editing
 function cancelEdit() {
   editingId = null;
   const form = document.getElementById('dynamic-form');
@@ -339,16 +349,18 @@ function cancelEdit() {
   generateForm();
 }
 
+// Delete an item
 function deleteItem(id) {
-  if (confirm('¿Estás seguro de que quieres eliminar este elemento?')) {
+  if (confirm('Are you sure you want to delete this item?')) {
     const data = JSON.parse(localStorage.getItem(currentContentType) || '[]');
     const filteredData = data.filter(item => item.id !== id);
     localStorage.setItem(currentContentType, JSON.stringify(filteredData));
     loadContent();
-    showStatus('success', `${currentContentType === 'posts' ? 'Artículo' : 'Producto'} eliminado exitosamente`);
+    showStatus('success', `${currentContentType === 'posts' ? 'Article' : 'Product'} deleted successfully`);
   }
 }
 
+// Toggle between light/dark theme
 function toggleTheme() {
   const body = document.body;
   const themeIcon = document.querySelector('.theme-icon');
@@ -366,23 +378,23 @@ function toggleTheme() {
   }
 }
 
-// Funciones de Local Storage
+// Local Storage functions
 function saveToStorage() {
   const key = document.getElementById('storage-key').value;
   const value = document.getElementById('storage-value').value;
   
   if (!key.trim()) {
-    showStorageStatus('error', 'Por favor ingresa una clave');
+    showStorageStatus('error', 'Please enter a key');
     return;
   }
   
   try {
     localStorage.setItem(key, value);
-    showStorageStatus('success', `Guardado: ${key} = ${value}`);
+    showStorageStatus('success', `Saved: ${key} = ${value}`);
     document.getElementById('storage-key').value = '';
     document.getElementById('storage-value').value = '';
   } catch (error) {
-    showStorageStatus('error', 'Error al guardar: ' + error.message);
+    showStorageStatus('error', 'Error saving: ' + error.message);
   }
 }
 
@@ -390,16 +402,16 @@ function getFromStorage() {
   const key = document.getElementById('storage-key').value;
   
   if (!key.trim()) {
-    showStorageStatus('error', 'Por favor ingresa una clave');
+    showStorageStatus('error', 'Please enter a key');
     return;
   }
   
   const value = localStorage.getItem(key);
   if (value !== null) {
     document.getElementById('storage-value').value = value;
-    showStorageStatus('success', `Obtenido: ${key} = ${value}`);
+    showStorageStatus('success', `Retrieved: ${key} = ${value}`);
   } else {
-    showStorageStatus('error', `No se encontró la clave: ${key}`);
+    showStorageStatus('error', `Key not found: ${key}`);
   }
 }
 
@@ -407,33 +419,35 @@ function removeFromStorage() {
   const key = document.getElementById('storage-key').value;
   
   if (!key.trim()) {
-    showStorageStatus('error', 'Por favor ingresa una clave');
+    showStorageStatus('error', 'Please enter a key');
     return;
   }
   
   if (localStorage.getItem(key) !== null) {
     localStorage.removeItem(key);
-    showStorageStatus('success', `Eliminado: ${key}`);
+    showStorageStatus('success', `Removed: ${key}`);
     document.getElementById('storage-key').value = '';
     document.getElementById('storage-value').value = '';
   } else {
-    showStorageStatus('error', `No se encontró la clave: ${key}`);
+    showStorageStatus('error', `Key not found: ${key}`);
   }
 }
 
 function clearStorage() {
-  if (confirm('¿Estás seguro de que quieres limpiar todo el Local Storage?')) {
+  if (confirm('Are you sure you want to clear all Local Storage?')) {
     localStorage.clear();
-    showStorageStatus('success', 'Local Storage limpiado completamente');
+    showStorageStatus('success', 'Local Storage cleared completely');
     document.getElementById('storage-key').value = '';
     document.getElementById('storage-value').value = '';
     
+    // Restore sample data
     localStorage.setItem('posts', JSON.stringify(sampleData.posts));
     localStorage.setItem('products', JSON.stringify(sampleData.products));
     loadContent();
   }
 }
 
+// Show status message for storage operations
 function showStorageStatus(type, message) {
   const output = document.getElementById('storage-output');
   if (!output) return;
@@ -443,6 +457,7 @@ function showStorageStatus(type, message) {
   }, 3000);
 }
 
+// Show status message for form operations
 function showStatus(type, message) {
   const statusDiv = document.getElementById('form-status');
   if (!statusDiv) return;
@@ -452,7 +467,7 @@ function showStatus(type, message) {
   }, 3000);
 }
 
-// Funciones del juego
+// Game functions
 function openGame() {
   if (isGameOpen) return;
   
@@ -461,7 +476,7 @@ function openGame() {
   if (overlay) {
     overlay.style.display = 'block';
     
-    // Verificar si el juego carga correctamente
+    // Check if game loads correctly
     setTimeout(() => {
       const iframe = document.getElementById('game-iframe');
       if (iframe) {
@@ -470,7 +485,7 @@ function openGame() {
             handleGameError();
           }
         } catch (error) {
-          console.warn('Error al verificar el juego:', error);
+          console.warn('Error checking game:', error);
         }
       }
     }, 2000);
@@ -490,7 +505,7 @@ function handleGameLoad() {
   if (errorDiv) {
     errorDiv.style.display = 'none';
   }
-  console.log('Juego cargado exitosamente');
+  console.log('Game loaded successfully');
 }
 
 function handleGameError() {
@@ -501,7 +516,7 @@ function handleGameError() {
     errorDiv.style.display = 'block';
     iframe.style.display = 'none';
   }
-  console.error('Error al cargar el juego');
+  console.error('Error loading game');
 }
 
 function retryGame() {
@@ -511,11 +526,11 @@ function retryGame() {
   if (iframe && errorDiv) {
     errorDiv.style.display = 'none';
     iframe.style.display = 'block';
-    iframe.src = iframe.src; // Recargar el iframe
+    iframe.src = iframe.src; // Reload iframe
   }
 }
 
-// Hacer funciones accesibles globalmente
+// Make functions globally accessible
 window.editItem = editItem;
 window.deleteItem = deleteItem;
 window.cancelEdit = cancelEdit;
