@@ -1,137 +1,166 @@
-/* Estilos generales */
+/* ==================== */
+/* GENERAL STYLES       */
+/* ==================== */
+
+/* Reset default browser styles */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Include padding and border in element's total width/height */
 }
 
+/* Base body styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  transition: all 0.3s ease;
+  line-height: 1.6; /* Improved readability with more line spacing */
+  transition: all 0.3s ease; /* Smooth transitions for theme changes */
 }
 
+/* Light mode color scheme */
 .light-mode {
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: #f5f5f5; /* Light gray background */
+  color: #333; /* Dark gray text */
 }
 
+/* Dark mode color scheme */
 .dark-mode {
-  background-color: #1a1a1a;
-  color: #f5f5f5;
+  background-color: #1a1a1a; /* Very dark gray background */
+  color: #f5f5f5; /* Off-white text */
 }
 
-/* Header */
+/* ==================== */
+/* HEADER STYLES        */
+/* ==================== */
+
 header {
+  /* Gradient background from purple to blue */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Subtle shadow for depth */
 }
 
+/* Main heading style */
 h1 {
   font-size: 1.8rem;
-  font-weight: 300;
+  font-weight: 300; /* Lighter font weight */
 }
 
+/* Theme toggle button */
 .theme-toggle {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.2); /* Semi-transparent white */
   border: none;
   padding: 0.5rem;
-  border-radius: 50%;
+  border-radius: 50%; /* Circular button */
   cursor: pointer;
   font-size: 1.2rem;
   transition: all 0.3s ease;
 }
 
 .theme-toggle:hover {
-  background: rgba(255,255,255,0.3);
-  transform: scale(1.1);
+  background: rgba(255,255,255,0.3); /* Slightly more opaque on hover */
+  transform: scale(1.1); /* Slight enlargement */
 }
 
-/* Main Content */
+/* ==================== */
+/* MAIN CONTENT AREA    */
+/* ==================== */
+
 main {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  max-width: 1200px; /* Limit content width for better readability */
+  margin: 2rem auto; /* Center content with top/bottom margin */
+  padding: 0 1rem; /* Side padding */
 }
 
-/* Tabs */
+/* ==================== */
+/* TAB STYLES           */
+/* ==================== */
+
+/* Container for tab buttons */
 .content-tabs {
   display: flex;
-  gap: 1rem;
+  gap: 1rem; /* Space between tabs */
   margin-bottom: 2rem;
 }
 
+/* Individual tab button */
 .tab-btn {
-  background: #667eea;
+  background: #667eea; /* Blue color */
   color: white;
   border: none;
   padding: 0.8rem 1.5rem;
-  border-radius: 25px;
+  border-radius: 25px; /* Pill-shaped buttons */
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 
 .tab-btn:hover {
-  background: #5a6fd8;
-  transform: translateY(-2px);
+  background: #5a6fd8; /* Slightly darker blue */
+  transform: translateY(-2px); /* Lift effect */
 }
 
 .tab-btn.active {
-  background: #764ba2;
-  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+  background: #764ba2; /* Purple color for active tab */
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3); /* Glow effect */
 }
 
-/* Content Container */
+/* ==================== */
+/* CONTENT CONTAINER    */
+/* ==================== */
+
 #content-container {
   background: white;
   border-radius: 15px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-  min-height: 200px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1); /* Subtle shadow */
+  min-height: 200px; /* Minimum height to prevent collapsing */
 }
 
 .dark-mode #content-container {
-  background: #2d2d2d;
+  background: #2d2d2d; /* Dark gray in dark mode */
   color: #f5f5f5;
 }
 
+/* Individual content items (articles/products) */
 .content-item {
-  background: #f8f9fa;
+  background: #f8f9fa; /* Very light gray */
   border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 1rem;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #667eea; /* Accent border */
   transition: all 0.3s ease;
 }
 
 .dark-mode .content-item {
-  background: #3d3d3d;
+  background: #3d3d3d; /* Darker gray in dark mode */
 }
 
 .content-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transform: translateX(5px); /* Slide effect on hover */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Shadow on hover */
 }
 
 .content-item h3 {
-  color: #667eea;
+  color: #667eea; /* Blue heading */
   margin-bottom: 0.5rem;
 }
 
+/* Action buttons container */
 .content-item .actions {
   margin-top: 1rem;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.5rem; /* Space between buttons */
 }
 
-/* Form Container */
+/* ==================== */
+/* FORM STYLES          */
+/* ==================== */
+
 #form-container {
   background: white;
   border-radius: 15px;
@@ -144,11 +173,13 @@ main {
   background: #2d2d2d;
 }
 
+/* Form title */
 #form-title {
   color: #667eea;
   margin-bottom: 1.5rem;
 }
 
+/* Form group (label + input) */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -161,9 +192,10 @@ main {
 }
 
 .dark-mode .form-group label {
-  color: #ccc;
+  color: #ccc; /* Lighter gray in dark mode */
 }
 
+/* Input fields */
 .form-group input,
 .form-group textarea {
   width: 100%;
@@ -177,7 +209,7 @@ main {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #667eea; /* Blue border on focus */
 }
 
 .dark-mode .form-group input,
@@ -187,7 +219,11 @@ main {
   color: #f5f5f5;
 }
 
-/* Buttons */
+/* ==================== */
+/* BUTTON STYLES        */
+/* ==================== */
+
+/* Base button styles */
 .submit-btn, .edit-btn, .delete-btn, .danger-btn {
   padding: 0.8rem 1.5rem;
   border: none;
@@ -198,6 +234,7 @@ main {
   margin-right: 0.5rem;
 }
 
+/* Submit button (green) */
 .submit-btn {
   background: #28a745;
   color: white;
@@ -208,6 +245,7 @@ main {
   transform: translateY(-2px);
 }
 
+/* Edit button (yellow) */
 .edit-btn {
   background: #ffc107;
   color: #212529;
@@ -218,6 +256,7 @@ main {
   transform: translateY(-2px);
 }
 
+/* Delete button (red) */
 .delete-btn {
   background: #dc3545;
   color: white;
@@ -228,6 +267,7 @@ main {
   transform: translateY(-2px);
 }
 
+/* Danger button (gray) */
 .danger-btn {
   background: #6c757d;
   color: white;
@@ -238,7 +278,10 @@ main {
   transform: translateY(-2px);
 }
 
-/* Storage Section */
+/* ==================== */
+/* LOCAL STORAGE SECTION */
+/* ==================== */
+
 #local-storage-section {
   background: white;
   border-radius: 15px;
@@ -251,16 +294,17 @@ main {
   background: #2d2d2d;
 }
 
+/* Storage controls container */
 .storage-controls {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.5rem;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .storage-controls input {
-  flex: 1;
-  min-width: 150px;
+  flex: 1; /* Grow to fill space */
+  min-width: 150px; /* Minimum width */
   padding: 0.8rem;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
@@ -273,14 +317,15 @@ main {
   color: #f5f5f5;
 }
 
+/* Storage output area */
 #storage-output {
   background: #f8f9fa;
   border-radius: 8px;
   padding: 1rem;
   min-height: 100px;
   border: 1px solid #e0e0e0;
-  font-family: monospace;
-  white-space: pre-wrap;
+  font-family: monospace; /* Monospace font for code-like appearance */
+  white-space: pre-wrap; /* Preserve formatting */
 }
 
 .dark-mode #storage-output {
@@ -289,23 +334,27 @@ main {
   color: #f5f5f5;
 }
 
-/* Game Icon */
+/* ==================== */
+/* GAME STYLES          */
+/* ==================== */
+
+/* Game icon container */
 #game-icon-container {
   position: fixed;
   bottom: 100px;
   right: 50px;
-  z-index: 1000;
+  z-index: 1000; /* Ensure it stays above other content */
 }
 
-/* Estilos para el juego */
+/* Game icon button */
 .game-icon {
   position: fixed;
   bottom: 20px;
   right: 20px;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
-  background-color: #22c4ff;
+  border-radius: 50%; /* Circular button */
+  background-color: #22c4ff; /* Bright blue */
   color: white;
   font-size: 24px;
   border: none;
@@ -316,19 +365,18 @@ main {
 }
 
 .game-icon:hover {
-  transform: scale(1.1);
+  transform: scale(1.1); /* Slight enlargement on hover */
 }
 
-/* Cambia esto: */
-/* Overlay del juego: ocupa toda la pantalla y está por encima de todo */
+/* Game overlay - covers entire screen */
 .game-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.95);
-  z-index: 99999;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  background: rgba(0,0,0,0.95); /* Semi-transparent black */
+  z-index: 99999; /* Very high z-index to ensure it's on top */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -336,7 +384,7 @@ main {
   padding: 0;
 }
 
-/* Contenedor del juego: ocupa todo el overlay */
+/* Game container inside overlay */
 .game-container {
   width: 100vw;
   height: 100vh;
@@ -346,38 +394,37 @@ main {
   background: transparent;
 }
 
-/* El iframe ocupa todo el espacio del contenedor */
+/* Game iframe (the actual game content) */
 .game-iframe {
   width: 100vw;
   height: 100vh;
   border: none;
-  background: #000;
+  background: #000; /* Black background */
   display: block;
   margin: 0;
   padding: 0;
 }
+
+/* Close game button */
 .close-game-btn {
   position: absolute;
   top: 10px;
   right: 10px;
   padding: 5px 10px;
-  background: #ff5722;
+  background: #ff5722; /* Orange color */
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-/* Estilos para el modal (opción 3) */
-/* Modal del juego - Más grande pero con márgenes */
-/* RESET COMPLETO DEL CONTENEDOR DEL JUEGO */
+/* Alternative game modal styles */
 .game-modal, 
 .game-modal * {
-  all: unset;
+  all: unset; /* Reset all styles */
   box-sizing: border-box;
 }
 
-/* ESTILOS NUEVOS DEFINITIVOS */
 .game-modal {
   position: fixed !important;
   top: 0 !important;
@@ -436,39 +483,51 @@ main {
   justify-content: center !important;
 }
 
-/* Status Messages */
+/* ==================== */
+/* STATUS MESSAGES      */
+/* ==================== */
+
 .success {
-  color: #28a745;
+  color: #28a745; /* Green for success */
   font-weight: 500;
 }
 
 .error {
-  color: #dc3545;
+  color: #dc3545; /* Red for errors */
   font-weight: 500;
 }
 
-/* Responsive Design */
+/* ==================== */
+/* RESPONSIVE DESIGN    */
+/* ==================== */
+
 @media (max-width: 768px) {
+  /* Smaller header padding on mobile */
   header {
     padding: 1rem;
   }
   
+  /* Smaller heading on mobile */
   h1 {
     font-size: 1.5rem;
   }
   
+  /* Stack tabs vertically on mobile */
   .content-tabs {
     flex-direction: column;
   }
   
+  /* Stack storage controls vertically */
   .storage-controls {
     flex-direction: column;
   }
   
+  /* Full width inputs on mobile */
   .storage-controls input {
     min-width: 100%;
   }
   
+  /* Slightly smaller game iframe on mobile */
   #game-iframe-container iframe {
     width: 95%;
     height: 95%;
