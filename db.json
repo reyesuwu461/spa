@@ -2,14 +2,14 @@
   "posts": [
     {
       "id": 1,
-      "title": "Introducción a JavaScript",
-      "body": "JavaScript es un lenguaje de programación versátil.",
-      "author": "Juan Pérez"
+      "title": "Introduction to JavaScript",
+      "body": "JavaScript is a versatile programming language.",
+      "author": "John Doe"
     },
     {
       "id": 2,
       "title": "DOM Manipulation",
-      "body": "El DOM permite interactuar con los elementos HTML.",
+      "body": "The DOM allows interaction with HTML elements.",
       "author": "Samuel Reyes"
     }
   ],
